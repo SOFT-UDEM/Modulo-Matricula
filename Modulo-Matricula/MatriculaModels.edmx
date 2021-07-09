@@ -1,0 +1,605 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="bdsistemaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Alumnos">
+          <Key>
+            <PropertyRef Name="IdAlumno" />
+          </Key>
+          <Property Name="IdAlumno" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="80" />
+          <Property Name="Apellido" Type="varchar" MaxLength="80" />
+          <Property Name="Direccion" Type="varchar" MaxLength="255" />
+          <Property Name="FechaDeNacimiento" Type="date" />
+          <Property Name="Sexo" Type="varchar" MaxLength="10" />
+          <Property Name="Religion" Type="varchar" MaxLength="20" />
+          <Property Name="IglesiaAlaQueAsiste" Type="varchar" MaxLength="60" />
+          <Property Name="EnfermedadCronica" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Grado">
+          <Key>
+            <PropertyRef Name="IdGrado" />
+          </Key>
+          <Property Name="IdGrado" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdAlumno" Type="int" />
+          <Property Name="Grupo" Type="varchar" MaxLength="50" />
+          <Property Name="CodigoNacionalDeEstudiante" Type="varchar" MaxLength="50" />
+          <Property Name="EstadoDelEstudiante" Type="varchar" MaxLength="40" />
+          <Property Name="CentroDeProcedencia" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Matricula">
+          <Key>
+            <PropertyRef Name="IdMatricula" />
+          </Key>
+          <Property Name="IdMatricula" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdAlumno" Type="int" />
+          <Property Name="FechaRegistro" Type="date" />
+          <Property Name="IdUsuario" Type="int" />
+        </EntityType>
+        <EntityType Name="ResponsableLegal">
+          <Key>
+            <PropertyRef Name="IdResponsable" />
+          </Key>
+          <Property Name="IdResponsable" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdAlumno" Type="int" />
+          <Property Name="Nombre" Type="varchar" MaxLength="80" />
+          <Property Name="Parentesco" Type="varchar" MaxLength="20" />
+          <Property Name="NumeroDeCedula" Type="varchar" MaxLength="20" />
+          <Property Name="Ocupacion" Type="varchar" MaxLength="30" />
+          <Property Name="LugarDeTrabajo" Type="varchar" MaxLength="60" />
+          <Property Name="Telefono" Type="varchar" MaxLength="30" />
+          <Property Name="CorreoElectronico" Type="varchar" MaxLength="100" />
+          <Property Name="DireccionDelResponsable" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="80" />
+          <Property Name="Apellido" Type="varchar" MaxLength="80" />
+          <Property Name="Usuario" Type="varchar" MaxLength="30" />
+          <Property Name="Contrasena" Type="varchar" MaxLength="200" />
+          <Property Name="Estado" Type="bit" />
+        </EntityType>
+        <Association Name="fk_Grado_IdAlumno">
+          <End Role="Alumnos" Type="Self.Alumnos" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Grado" Type="Self.Grado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alumnos">
+              <PropertyRef Name="IdAlumno" />
+            </Principal>
+            <Dependent Role="Grado">
+              <PropertyRef Name="IdAlumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Matricula_IdAlumno">
+          <End Role="Alumnos" Type="Self.Alumnos" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Matricula" Type="Self.Matricula" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alumnos">
+              <PropertyRef Name="IdAlumno" />
+            </Principal>
+            <Dependent Role="Matricula">
+              <PropertyRef Name="IdAlumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Matricula_IdUsuario">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Matricula" Type="Self.Matricula" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Matricula">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ResponsableLegal_IdAlumno">
+          <End Role="Alumnos" Type="Self.Alumnos" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ResponsableLegal" Type="Self.ResponsableLegal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alumnos">
+              <PropertyRef Name="IdAlumno" />
+            </Principal>
+            <Dependent Role="ResponsableLegal">
+              <PropertyRef Name="IdAlumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="SpAlumnos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdAlumno" Type="int" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="Apellido" Type="varchar" Mode="In" />
+          <Parameter Name="Direccion" Type="varchar" Mode="In" />
+          <Parameter Name="FechaDeNacimiento" Type="date" Mode="In" />
+          <Parameter Name="Sexo" Type="varchar" Mode="In" />
+          <Parameter Name="Religion" Type="varchar" Mode="In" />
+          <Parameter Name="IglesiaAlaQueAsiste" Type="varchar" Mode="In" />
+          <Parameter Name="EnfermedadCronica" Type="varchar" Mode="In" />
+          <Parameter Name="W_Operacion" Type="varchar" Mode="In" />
+          <Parameter Name="O_Mensaje" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="SpGrado" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdGrado" Type="int" Mode="In" />
+          <Parameter Name="IdAlumno" Type="int" Mode="In" />
+          <Parameter Name="Grupo" Type="varchar" Mode="In" />
+          <Parameter Name="CodigoNacionalDeEstudiante" Type="varchar" Mode="In" />
+          <Parameter Name="EstadoDelEstudiante" Type="varchar" Mode="In" />
+          <Parameter Name="CentroDeProcedencia" Type="varchar" Mode="In" />
+          <Parameter Name="W_Operacion" Type="varchar" Mode="In" />
+          <Parameter Name="O_Mensaje" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="SpMatricula" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdMatricula" Type="int" Mode="In" />
+          <Parameter Name="IdAlumno" Type="int" Mode="In" />
+          <Parameter Name="FechaRegistro" Type="date" Mode="In" />
+          <Parameter Name="IdUsuario" Type="int" Mode="In" />
+          <Parameter Name="W_Operacion" Type="varchar" Mode="In" />
+          <Parameter Name="O_Mensaje" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="SpResponsableLegal" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdResponsable" Type="int" Mode="In" />
+          <Parameter Name="IdAlumno" Type="int" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="Parentesco" Type="varchar" Mode="In" />
+          <Parameter Name="NumeroDeCedula" Type="varchar" Mode="In" />
+          <Parameter Name="Ocupacion" Type="varchar" Mode="In" />
+          <Parameter Name="LugarDeTrabajo" Type="varchar" Mode="In" />
+          <Parameter Name="Telefono" Type="varchar" Mode="In" />
+          <Parameter Name="CorreoElectronico" Type="varchar" Mode="In" />
+          <Parameter Name="DireccionDelResponsable" Type="varchar" Mode="In" />
+          <Parameter Name="W_Operacion" Type="varchar" Mode="In" />
+          <Parameter Name="O_Mensaje" Type="varchar" Mode="InOut" />
+        </Function>
+        <Function Name="SpUsuarios" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdUsuario" Type="int" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="Apellido" Type="varchar" Mode="In" />
+          <Parameter Name="Usuario" Type="varchar" Mode="In" />
+          <Parameter Name="Contrasena" Type="varchar" Mode="In" />
+          <Parameter Name="Estado" Type="bit" Mode="In" />
+          <Parameter Name="W_Operacion" Type="varchar" Mode="In" />
+          <Parameter Name="O_Mensaje" Type="varchar" Mode="InOut" />
+        </Function>
+        <EntityContainer Name="bdsistemaModelStoreContainer">
+          <EntitySet Name="Alumnos" EntityType="Self.Alumnos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Grado" EntityType="Self.Grado" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Matricula" EntityType="Self.Matricula" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ResponsableLegal" EntityType="Self.ResponsableLegal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_Grado_IdAlumno" Association="Self.fk_Grado_IdAlumno">
+            <End Role="Alumnos" EntitySet="Alumnos" />
+            <End Role="Grado" EntitySet="Grado" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Matricula_IdAlumno" Association="Self.fk_Matricula_IdAlumno">
+            <End Role="Alumnos" EntitySet="Alumnos" />
+            <End Role="Matricula" EntitySet="Matricula" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Matricula_IdUsuario" Association="Self.fk_Matricula_IdUsuario">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Matricula" EntitySet="Matricula" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ResponsableLegal_IdAlumno" Association="Self.fk_ResponsableLegal_IdAlumno">
+            <End Role="Alumnos" EntitySet="Alumnos" />
+            <End Role="ResponsableLegal" EntitySet="ResponsableLegal" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="bdsistemaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Alumnos">
+          <Key>
+            <PropertyRef Name="IdAlumno" />
+          </Key>
+          <Property Name="IdAlumno" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="Apellido" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="Direccion" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="FechaDeNacimiento" Type="DateTime" Precision="0" />
+          <Property Name="Sexo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Religion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IglesiaAlaQueAsiste" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="EnfermedadCronica" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Grado" Relationship="Self.fk_Grado_IdAlumno" FromRole="Alumnos" ToRole="Grado" />
+          <NavigationProperty Name="Matricula" Relationship="Self.fk_Matricula_IdAlumno" FromRole="Alumnos" ToRole="Matricula" />
+          <NavigationProperty Name="ResponsableLegal" Relationship="Self.fk_ResponsableLegal_IdAlumno" FromRole="Alumnos" ToRole="ResponsableLegal" />
+        </EntityType>
+        <EntityType Name="Grado">
+          <Key>
+            <PropertyRef Name="IdGrado" />
+          </Key>
+          <Property Name="IdGrado" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdAlumno" Type="Int32" />
+          <Property Name="Grupo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CodigoNacionalDeEstudiante" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EstadoDelEstudiante" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="CentroDeProcedencia" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Alumnos" Relationship="Self.fk_Grado_IdAlumno" FromRole="Grado" ToRole="Alumnos" />
+        </EntityType>
+        <EntityType Name="Matricula">
+          <Key>
+            <PropertyRef Name="IdMatricula" />
+          </Key>
+          <Property Name="IdMatricula" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdAlumno" Type="Int32" />
+          <Property Name="FechaRegistro" Type="DateTime" Precision="0" />
+          <Property Name="IdUsuario" Type="Int32" />
+          <NavigationProperty Name="Alumnos" Relationship="Self.fk_Matricula_IdAlumno" FromRole="Matricula" ToRole="Alumnos" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.fk_Matricula_IdUsuario" FromRole="Matricula" ToRole="Usuarios" />
+        </EntityType>
+        <EntityType Name="ResponsableLegal">
+          <Key>
+            <PropertyRef Name="IdResponsable" />
+          </Key>
+          <Property Name="IdResponsable" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdAlumno" Type="Int32" />
+          <Property Name="Nombre" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="Parentesco" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="NumeroDeCedula" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Ocupacion" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="LugarDeTrabajo" Type="String" MaxLength="60" FixedLength="false" Unicode="false" />
+          <Property Name="Telefono" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="CorreoElectronico" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DireccionDelResponsable" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Alumnos" Relationship="Self.fk_ResponsableLegal_IdAlumno" FromRole="ResponsableLegal" ToRole="Alumnos" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="IdUsuario" />
+          </Key>
+          <Property Name="IdUsuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="Apellido" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="Usuario" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Contrasena" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Boolean" />
+          <NavigationProperty Name="Matricula" Relationship="Self.fk_Matricula_IdUsuario" FromRole="Usuarios" ToRole="Matricula" />
+        </EntityType>
+        <Association Name="fk_Grado_IdAlumno">
+          <End Role="Alumnos" Type="Self.Alumnos" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Grado" Type="Self.Grado" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alumnos">
+              <PropertyRef Name="IdAlumno" />
+            </Principal>
+            <Dependent Role="Grado">
+              <PropertyRef Name="IdAlumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Matricula_IdAlumno">
+          <End Role="Alumnos" Type="Self.Alumnos" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Matricula" Type="Self.Matricula" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alumnos">
+              <PropertyRef Name="IdAlumno" />
+            </Principal>
+            <Dependent Role="Matricula">
+              <PropertyRef Name="IdAlumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_ResponsableLegal_IdAlumno">
+          <End Role="Alumnos" Type="Self.Alumnos" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ResponsableLegal" Type="Self.ResponsableLegal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Alumnos">
+              <PropertyRef Name="IdAlumno" />
+            </Principal>
+            <Dependent Role="ResponsableLegal">
+              <PropertyRef Name="IdAlumno" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_Matricula_IdUsuario">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Matricula" Type="Self.Matricula" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="IdUsuario" />
+            </Principal>
+            <Dependent Role="Matricula">
+              <PropertyRef Name="IdUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="bdsistemaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Alumnos" EntityType="Self.Alumnos" />
+          <EntitySet Name="Grado" EntityType="Self.Grado" />
+          <EntitySet Name="Matricula" EntityType="Self.Matricula" />
+          <EntitySet Name="ResponsableLegal" EntityType="Self.ResponsableLegal" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
+          <AssociationSet Name="fk_Grado_IdAlumno" Association="Self.fk_Grado_IdAlumno">
+            <End Role="Alumnos" EntitySet="Alumnos" />
+            <End Role="Grado" EntitySet="Grado" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Matricula_IdAlumno" Association="Self.fk_Matricula_IdAlumno">
+            <End Role="Alumnos" EntitySet="Alumnos" />
+            <End Role="Matricula" EntitySet="Matricula" />
+          </AssociationSet>
+          <AssociationSet Name="fk_ResponsableLegal_IdAlumno" Association="Self.fk_ResponsableLegal_IdAlumno">
+            <End Role="Alumnos" EntitySet="Alumnos" />
+            <End Role="ResponsableLegal" EntitySet="ResponsableLegal" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Matricula_IdUsuario" Association="Self.fk_Matricula_IdUsuario">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Matricula" EntitySet="Matricula" />
+          </AssociationSet>
+          <FunctionImport Name="SpAlumnos" ReturnType="Collection(bdsistemaModel.SpAlumnos_Result)">
+            <Parameter Name="IdAlumno" Mode="In" Type="Int32" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Apellido" Mode="In" Type="String" />
+            <Parameter Name="Direccion" Mode="In" Type="String" />
+            <Parameter Name="FechaDeNacimiento" Mode="In" Type="DateTime" />
+            <Parameter Name="Sexo" Mode="In" Type="String" />
+            <Parameter Name="Religion" Mode="In" Type="String" />
+            <Parameter Name="IglesiaAlaQueAsiste" Mode="In" Type="String" />
+            <Parameter Name="EnfermedadCronica" Mode="In" Type="String" />
+            <Parameter Name="W_Operacion" Mode="In" Type="String" />
+            <Parameter Name="O_Mensaje" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SpGrado" ReturnType="Collection(bdsistemaModel.SpGrado_Result)">
+            <Parameter Name="IdGrado" Mode="In" Type="Int32" />
+            <Parameter Name="IdAlumno" Mode="In" Type="Int32" />
+            <Parameter Name="Grupo" Mode="In" Type="String" />
+            <Parameter Name="CodigoNacionalDeEstudiante" Mode="In" Type="String" />
+            <Parameter Name="EstadoDelEstudiante" Mode="In" Type="String" />
+            <Parameter Name="CentroDeProcedencia" Mode="In" Type="String" />
+            <Parameter Name="W_Operacion" Mode="In" Type="String" />
+            <Parameter Name="O_Mensaje" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SpMatricula" ReturnType="Collection(bdsistemaModel.SpMatricula_Result)">
+            <Parameter Name="IdMatricula" Mode="In" Type="Int32" />
+            <Parameter Name="IdAlumno" Mode="In" Type="Int32" />
+            <Parameter Name="FechaRegistro" Mode="In" Type="DateTime" />
+            <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
+            <Parameter Name="W_Operacion" Mode="In" Type="String" />
+            <Parameter Name="O_Mensaje" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SpResponsableLegal" ReturnType="Collection(bdsistemaModel.SpResponsableLegal_Result)">
+            <Parameter Name="IdResponsable" Mode="In" Type="Int32" />
+            <Parameter Name="IdAlumno" Mode="In" Type="Int32" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Parentesco" Mode="In" Type="String" />
+            <Parameter Name="NumeroDeCedula" Mode="In" Type="String" />
+            <Parameter Name="Ocupacion" Mode="In" Type="String" />
+            <Parameter Name="LugarDeTrabajo" Mode="In" Type="String" />
+            <Parameter Name="Telefono" Mode="In" Type="String" />
+            <Parameter Name="CorreoElectronico" Mode="In" Type="String" />
+            <Parameter Name="DireccionDelResponsable" Mode="In" Type="String" />
+            <Parameter Name="W_Operacion" Mode="In" Type="String" />
+            <Parameter Name="O_Mensaje" Mode="InOut" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SpUsuarios" ReturnType="Collection(bdsistemaModel.SpUsuarios_Result)">
+            <Parameter Name="IdUsuario" Mode="In" Type="Int32" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Apellido" Mode="In" Type="String" />
+            <Parameter Name="Usuario" Mode="In" Type="String" />
+            <Parameter Name="Contrasena" Mode="In" Type="String" />
+            <Parameter Name="Estado" Mode="In" Type="Boolean" />
+            <Parameter Name="W_Operacion" Mode="In" Type="String" />
+            <Parameter Name="O_Mensaje" Mode="InOut" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="SpAlumnos_Result">
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="80" />
+          <Property Type="String" Name="Apellido" Nullable="true" MaxLength="80" />
+          <Property Type="String" Name="Direccion" Nullable="true" MaxLength="255" />
+          <Property Type="DateTime" Name="FechaDeNacimiento" Nullable="true" />
+          <Property Type="String" Name="Sexo" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Religion" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="IglesiaAlaQueAsiste" Nullable="true" MaxLength="60" />
+          <Property Type="String" Name="EnfermedadCronica" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="SpGrado_Result">
+          <Property Type="Int32" Name="IdGrado" Nullable="false" />
+          <Property Type="Int32" Name="IdAlumno" Nullable="true" />
+          <Property Type="String" Name="CodigoNacionalDeEstudiante" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="EstadoDelEstudiante" Nullable="true" MaxLength="40" />
+          <Property Type="String" Name="CentroDeProcedencia" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="SpMatricula_Result">
+          <Property Type="Int32" Name="IdMatricula" Nullable="false" />
+          <Property Type="Int32" Name="IdAlumno" Nullable="true" />
+          <Property Type="DateTime" Name="FechaRegistro" Nullable="true" />
+          <Property Type="Int32" Name="IdUsuario" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SpResponsableLegal_Result">
+          <Property Type="Int32" Name="IdResponsable" Nullable="false" />
+          <Property Type="Int32" Name="IdAlumno" Nullable="true" />
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="80" />
+          <Property Type="String" Name="Parentesco" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="NumeroDeCedula" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="Ocupacion" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="LugarDeTrabajo" Nullable="true" MaxLength="60" />
+          <Property Type="String" Name="Telefono" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="CorreoElectronico" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="DireccionDelResponsable" Nullable="true" MaxLength="255" />
+        </ComplexType>
+        <ComplexType Name="SpUsuarios_Result">
+          <Property Type="String" Name="Nombre" Nullable="true" MaxLength="80" />
+          <Property Type="String" Name="Apellido" Nullable="true" MaxLength="80" />
+          <Property Type="String" Name="Usuario" Nullable="true" MaxLength="30" />
+          <Property Type="Boolean" Name="Estado" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="bdsistemaModelStoreContainer" CdmEntityContainer="bdsistemaEntities">
+          <EntitySetMapping Name="Alumnos">
+            <EntityTypeMapping TypeName="bdsistemaModel.Alumnos">
+              <MappingFragment StoreEntitySet="Alumnos">
+                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="FechaDeNacimiento" ColumnName="FechaDeNacimiento" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="Religion" ColumnName="Religion" />
+                <ScalarProperty Name="IglesiaAlaQueAsiste" ColumnName="IglesiaAlaQueAsiste" />
+                <ScalarProperty Name="EnfermedadCronica" ColumnName="EnfermedadCronica" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Grado">
+            <EntityTypeMapping TypeName="bdsistemaModel.Grado">
+              <MappingFragment StoreEntitySet="Grado">
+                <ScalarProperty Name="IdGrado" ColumnName="IdGrado" />
+                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+                <ScalarProperty Name="Grupo" ColumnName="Grupo" />
+                <ScalarProperty Name="CodigoNacionalDeEstudiante" ColumnName="CodigoNacionalDeEstudiante" />
+                <ScalarProperty Name="EstadoDelEstudiante" ColumnName="EstadoDelEstudiante" />
+                <ScalarProperty Name="CentroDeProcedencia" ColumnName="CentroDeProcedencia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Matricula">
+            <EntityTypeMapping TypeName="bdsistemaModel.Matricula">
+              <MappingFragment StoreEntitySet="Matricula">
+                <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
+                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ResponsableLegal">
+            <EntityTypeMapping TypeName="bdsistemaModel.ResponsableLegal">
+              <MappingFragment StoreEntitySet="ResponsableLegal">
+                <ScalarProperty Name="IdResponsable" ColumnName="IdResponsable" />
+                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Parentesco" ColumnName="Parentesco" />
+                <ScalarProperty Name="NumeroDeCedula" ColumnName="NumeroDeCedula" />
+                <ScalarProperty Name="Ocupacion" ColumnName="Ocupacion" />
+                <ScalarProperty Name="LugarDeTrabajo" ColumnName="LugarDeTrabajo" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="CorreoElectronico" ColumnName="CorreoElectronico" />
+                <ScalarProperty Name="DireccionDelResponsable" ColumnName="DireccionDelResponsable" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="bdsistemaModel.Usuarios">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Contrasena" ColumnName="Contrasena" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SpAlumnos" FunctionName="bdsistemaModel.Store.SpAlumnos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="bdsistemaModel.SpAlumnos_Result">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Direccion" ColumnName="Direccion" />
+                <ScalarProperty Name="FechaDeNacimiento" ColumnName="FechaDeNacimiento" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="Religion" ColumnName="Religion" />
+                <ScalarProperty Name="IglesiaAlaQueAsiste" ColumnName="IglesiaAlaQueAsiste" />
+                <ScalarProperty Name="EnfermedadCronica" ColumnName="EnfermedadCronica" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SpGrado" FunctionName="bdsistemaModel.Store.SpGrado">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="bdsistemaModel.SpGrado_Result">
+                <ScalarProperty Name="IdGrado" ColumnName="IdGrado" />
+                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+                <ScalarProperty Name="CodigoNacionalDeEstudiante" ColumnName="CodigoNacionalDeEstudiante" />
+                <ScalarProperty Name="EstadoDelEstudiante" ColumnName="EstadoDelEstudiante" />
+                <ScalarProperty Name="CentroDeProcedencia" ColumnName="CentroDeProcedencia" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SpMatricula" FunctionName="bdsistemaModel.Store.SpMatricula">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="bdsistemaModel.SpMatricula_Result">
+                <ScalarProperty Name="IdMatricula" ColumnName="IdMatricula" />
+                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+                <ScalarProperty Name="FechaRegistro" ColumnName="FechaRegistro" />
+                <ScalarProperty Name="IdUsuario" ColumnName="IdUsuario" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SpResponsableLegal" FunctionName="bdsistemaModel.Store.SpResponsableLegal">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="bdsistemaModel.SpResponsableLegal_Result">
+                <ScalarProperty Name="IdResponsable" ColumnName="IdResponsable" />
+                <ScalarProperty Name="IdAlumno" ColumnName="IdAlumno" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Parentesco" ColumnName="Parentesco" />
+                <ScalarProperty Name="NumeroDeCedula" ColumnName="NumeroDeCedula" />
+                <ScalarProperty Name="Ocupacion" ColumnName="Ocupacion" />
+                <ScalarProperty Name="LugarDeTrabajo" ColumnName="LugarDeTrabajo" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="CorreoElectronico" ColumnName="CorreoElectronico" />
+                <ScalarProperty Name="DireccionDelResponsable" ColumnName="DireccionDelResponsable" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SpUsuarios" FunctionName="bdsistemaModel.Store.SpUsuarios">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="bdsistemaModel.SpUsuarios_Result">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Apellido" ColumnName="Apellido" />
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

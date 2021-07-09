@@ -49,8 +49,8 @@ CREATE TABLE Usuarios (
 	IdUsuario INT IDENTITY,
 	Nombre Varchar(80),
 	Apellido VARCHAR(80),
-	Usuario VARCHAR(10),
-	Contrasena VARCHAR(50),
+	Usuario VARCHAR(30),
+	Contrasena VARCHAR(200),
 	Estado Bit,
 	CONSTRAINT pk_Usuarios_IdUsuario PRIMARY KEY NONCLUSTERED(IdUsuario)
 )
@@ -123,8 +123,8 @@ CREATE PROCEDURE SpUsuarios
 	@IdUsuario INT,
 	@Nombre Varchar(80),
 	@Apellido VARCHAR(80),
-	@Usuario VARCHAR(10),
-	@Contrasena VARCHAR(50),
+	@Usuario VARCHAR(30),
+	@Contrasena VARCHAR(200),
 	@Estado Bit,
 	-- Variable de trabajo Work.
 	@W_Operacion VARCHAR(10),

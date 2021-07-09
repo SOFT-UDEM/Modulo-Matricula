@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="8f6ef19401724b899a3b13c31de6e974" Name="Diagram1">
+        <EntityTypeShape EntityType="bdsistemaModel.Alumnos" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdsistemaModel.Grado" Width="1.5" PointX="3" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdsistemaModel.Matricula" Width="1.5" PointX="6" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdsistemaModel.ResponsableLegal" Width="1.5" PointX="3" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="bdsistemaModel.Usuarios" Width="1.5" PointX="3.75" PointY="12.625" IsExpanded="true" />
+        <AssociationConnector Association="bdsistemaModel.fk_Grado_IdAlumno" ManuallyRouted="false" />
+        <AssociationConnector Association="bdsistemaModel.fk_Matricula_IdAlumno" ManuallyRouted="false" />
+        <AssociationConnector Association="bdsistemaModel.fk_ResponsableLegal_IdAlumno" ManuallyRouted="false" />
+        <AssociationConnector Association="bdsistemaModel.fk_Matricula_IdUsuario" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
