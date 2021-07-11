@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+    //Layout = "~/Views/Shared/LayoutLogin.cshtml";
+}
+
+<h2>Login</h2>
+
+<div class="row">
+
+
+    <form action="@Url.Content("~/Login")" method="post">
+        <div class=" form-group">
+            <label>Usuario</label>
+            <input type="email" name="email" placeholder="Ingresa su Correo..." />
+        </div>
+
+        <div class=" form-group">
+            <label>Contraseña</label>
+            <input type="password" name="pass" placeholder="Ingresa su contraseña..." />
+        </div>
+
+        <p>Estoy de acuerdo con<a href="#"> Terminos y condiciones</a></p>
+
+        <div class="form-group">
+            <input type="button" value="entrar" class="btn btn-success" />
+        </div>
+
+    </form>
+
+</div>
