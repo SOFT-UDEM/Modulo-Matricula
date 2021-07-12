@@ -19,7 +19,7 @@ namespace Modulo_Matricula.Controllers
         // Metodo post para capturar el User y el Password....
 
         [HttpPost]
-        public ActionResult Login(string usuario, string pass)
+        public ActionResult Login(string email, string pass)
         {
             try
             {
@@ -31,7 +31,7 @@ namespace Modulo_Matricula.Controllers
                     //declaramos la variable que captura los datos del los imput...
 
                     var oUser = (from d in db.Usuarios
-                                 where d.Usuario == usuario.Trim() && d.Contrasena == pass.Trim()
+                                 where d.Usuario == email.Trim() && d.Contrasena == pass.Trim()
                                  select d).FirstOrDefault();
 
 
