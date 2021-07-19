@@ -5,13 +5,19 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<style>
+    .myBtn {
+        border: 1px solid #3f66fb;
+        border-radius: 5px;
+    }
+</style>
+<h2>Administración de usuarios.</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<div style="margin-bottom: 16px;" class="btn btn-secondary myBtn">
+    @Html.ActionLink("Crear nuevo usuario", "Create") 
+</div>
 <table class="table">
-    <tr>
+    <tr style="background-color: #273D4B; color: #ffffff;">
         <th>
             @Html.DisplayNameFor(model => model.Nombre)
         </th>
@@ -20,9 +26,6 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Usuario)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Contrasena)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Estado)
@@ -42,15 +45,18 @@
             @Html.DisplayFor(modelItem => item.Usuario)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Contrasena)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Estado)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IdUsuario }) |
-            @Html.ActionLink("Details", "Details", new { id=item.IdUsuario }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.IdUsuario })
+            <div class="btn btn-secondary myBtn">
+                @Html.ActionLink("Editar", "Edit", new { id=item.IdUsuario })
+            </div>
+            <div class="btn btn-secondary myBtn">
+                @Html.ActionLink("Ver", "Details", new { id=item.IdUsuario })
+            </div>
+            <div class="btn btn-secondary myBtn">
+                @Html.ActionLink("Eliminar", "Delete", new { id=item.IdUsuario })
+            </div>
         </td>
     </tr>
 }
