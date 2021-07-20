@@ -50,6 +50,8 @@ namespace Modulo_Matricula.Controllers
         {
             if (ModelState.IsValid)
             {
+                //Encriptamos contraseña antes de guardar, utilizando el metodo GetSHA256
+                usuarios.Contrasena = Encrypt.GetSHA256(usuarios.Contrasena);
                 db.Usuarios.Add(usuarios);
                 db.SaveChanges();
                 return RedirectToAction("Index");
