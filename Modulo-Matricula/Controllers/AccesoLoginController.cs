@@ -28,6 +28,9 @@ namespace Modulo_Matricula.Controllers
 
                 using (bdsistemaEntities db = new bdsistemaEntities())
                 {
+                    //Encriptamos la contraseña que el usuario escribio.
+                    //Para compararla con las contraseñas encriptadas en nuestra base de datos.
+                    pass = Encrypt.GetSHA256(pass);
                     //declaramos la variable que captura los datos del los imput...
 
                     var oUser = (from d in db.Usuarios
