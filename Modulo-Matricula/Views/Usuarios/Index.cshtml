@@ -1,0 +1,64 @@
+﻿@model IEnumerable<Modulo_Matricula.Usuarios>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .myBtn {
+        border: 1px solid #3f66fb;
+        border-radius: 5px;
+    }
+</style>
+<h2>Administración de usuarios.</h2>
+
+<div style="margin-bottom: 16px;" class="btn btn-secondary myBtn">
+    @Html.ActionLink("Crear nuevo usuario", "Create") 
+</div>
+<table class="table">
+    <tr style="background-color: #273D4B; color: #ffffff;">
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Apellido)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Usuario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Estado)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Apellido)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Usuario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Estado)
+        </td>
+        <td>
+            <div class="btn btn-secondary myBtn">
+                @Html.ActionLink("Editar", "Edit", new { id=item.IdUsuario })
+            </div>
+            <div class="btn btn-secondary myBtn">
+                @Html.ActionLink("Ver", "Details", new { id=item.IdUsuario })
+            </div>
+            <div class="btn btn-secondary myBtn">
+                @Html.ActionLink("Eliminar", "Delete", new { id=item.IdUsuario })
+            </div>
+        </td>
+    </tr>
+}
+
+</table>

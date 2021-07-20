@@ -76,10 +76,9 @@ CREATE TABLE Matricula (
 	IdMatricula INT IDENTITY,
 	IdAlumno INT,
 	FechaRegistro DATE,
-	IdUsuario INT,
+	Usuario VARCHAR(30),
 	CONSTRAINT pk_Matricula_IdMatricula PRIMARY KEY NONCLUSTERED(IdMatricula),
-	CONSTRAINT fk_Matricula_IdAlumno FOREIGN KEY(IdAlumno) REFERENCES Alumnos(IdAlumno) ON UPDATE CASCADE ON DELETE CASCADE,
-	CONSTRAINT fk_Matricula_IdUsuario FOREIGN KEY(IdUsuario) REFERENCES Usuarios(IdUsuario) ON UPDATE CASCADE ON DELETE CASCADE
+	CONSTRAINT fk_Matricula_IdAlumno FOREIGN KEY(IdAlumno) REFERENCES Alumnos(IdAlumno) ON UPDATE CASCADE ON DELETE CASCADE
 )
 GO
 
@@ -288,7 +287,7 @@ CREATE PROCEDURE SpMatricula
 	@IdMatricula INT,
 	@IdAlumno INT,
 	@FechaRegistro DATE,
-	@IdUsuario INT,
+	@Usuario VARCHAR(30),
 	-- Variable de trabajo Work.
 	@W_Operacion VARCHAR(10),
 	-- Variable de salida OUTPUT.
@@ -304,13 +303,13 @@ BEGIN
 		(
 			IdAlumno,
 			FechaRegistro,
-			IdUsuario
+			Usuario
 		)
 		VALUES
 		(
 			@IdAlumno,
 			@FechaRegistro,
-			@IdUsuario
+			@Usuario
 		)
 		SELECT @O_Mensaje = 'SE HA INSERTADO CORRECTAMENTE EN LA TABLA MATRICULA.'
 	END
@@ -322,7 +321,7 @@ BEGIN
 			SET
 				IdAlumno = @IdAlumno,
 				FechaRegistro = @FechaRegistro,
-				IdUsuario = @IdUsuario
+				Usuario = @Usuario
 				WHERE IdMatricula = @IdMatricula
 			SELECT @O_Mensaje = 'SE HA ACTUALIZADO CORRECTAMENTE UN REGISTRO DE LA TABLA MATRICULA.'
 	END
@@ -330,7 +329,7 @@ BEGIN
 	--Validar tipo de operación "S" es SELECT.
 	IF (@W_Operacion = 'S')
 	BEGIN
-		SELECT IdMatricula, IdAlumno, FechaRegistro, IdUsuario
+		SELECT IdMatricula, IdAlumno, FechaRegistro, Usuario
 			FROM Matricula
 		SELECT @O_Mensaje = 'SE REALIZO UN SELECT CORRECTAMENTE A LA TABLA MATRICULAS.'
 	END

@@ -8,6 +8,7 @@ namespace Modulo_Matricula
         public static void RegisterGlobalFilters(GlobalFilterCollection filters)
         {
             filters.Add(new HandleErrorAttribute());
+            filters.Add(new Filters.VerificarSeccion());
         }
     }
 }
