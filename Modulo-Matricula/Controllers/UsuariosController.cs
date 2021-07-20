@@ -84,6 +84,8 @@ namespace Modulo_Matricula.Controllers
         {
             if (ModelState.IsValid)
             {
+                //Encriptamos la contraseña antes de guardar los cambios.
+                usuarios.Contrasena = Encrypt.GetSHA256(usuarios.Contrasena);
                 db.Entry(usuarios).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
