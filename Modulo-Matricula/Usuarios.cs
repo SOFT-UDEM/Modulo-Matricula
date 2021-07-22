@@ -72,7 +72,7 @@ namespace Modulo_Matricula
         [DataType(DataType.Password)]
         [RegularExpression(@"^\A([^a-z][^A-Z][^0-9][^(!#$%&¡?¿@)])\Z$", ErrorMessage = "Debe contener Mayusculas,Numeros y Simbolos.")]
         
-        public string Contrasena { get => _contrasena; set => Encrypt.GetSHA256(Contrasena); }
+        public string Contrasena { get; set; }
 
 
         //agregaos este campo para confirmar contraseña.
