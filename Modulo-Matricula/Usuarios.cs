@@ -68,19 +68,20 @@ namespace Modulo_Matricula
 
         [Required(ErrorMessage = "Este campo esta Vacío.")]
         [DisplayName("Ingrese su Contraseña: ")]
-        [StringLength(maximumLength: 64, MinimumLength = 8, ErrorMessage ="Solo se puede ingresar 8 caracteres")]
+        [StringLength(maximumLength: 64, MinimumLength = 8, ErrorMessage = "Solo se puede ingresar 8 caracteres")]
         [DataType(DataType.Password)]
-        //[RegularExpression(@"^\A([^a-z][^A-Z][^0-9][^(!#$%&¡?¿@)])\Z$", ErrorMessage = "Debe contener Mayusculas,Numeros y Simbolos.")]
-        public string Contrasena { get; set; }
+        [RegularExpression(@"^\A([^a-z][^A-Z][^0-9][^(!#$%&¡?¿@)])\Z$", ErrorMessage = "Debe contener Mayusculas,Numeros y Simbolos.")]
+        
+        public string Contrasena { get => _contrasena; set => Encrypt.GetSHA256(Contrasena); }
 
 
         //agregaos este campo para confirmar contraseña.
 
-        //[DisplayName("Confirmar tu Contraseña: ")]
-        //[Compare("Contrasena")]
-        //[DataType(DataType.Password)]
-        //[StringLength(maximumLength: 64, MinimumLength = 8, ErrorMessage = "Solo se puede ingresar 8 caracteres")]
-        //public string Contrasena2 { get; set; }
+        [DisplayName("Confirmar tu Contraseña: ")]
+        [Compare("Contrasena")]
+        [DataType(DataType.Password)]
+        [StringLength(maximumLength: 64, MinimumLength = 8, ErrorMessage = "Solo se puede ingresar 8 caracteres")]
+        public string Contrasena2 { get; set; }
 
 
         [DisplayName("Rol de administrador:")]
@@ -88,7 +89,6 @@ namespace Modulo_Matricula
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Matricula> Matricula { get; set; }
-
-       
+        public string _contrasena { get; private set; }
     }
 }

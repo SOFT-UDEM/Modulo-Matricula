@@ -51,7 +51,7 @@ namespace Modulo_Matricula.Controllers
             if (ModelState.IsValid)
             {
                 //Encriptamos contraseña antes de guardar, utilizando el metodo GetSHA256
-                usuarios.Contrasena = Encrypt.GetSHA256(usuarios.Contrasena);
+                //usuarios.Contrasena = Encrypt.GetSHA256(usuarios.Contrasena);
                 db.Usuarios.Add(usuarios);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -85,7 +85,7 @@ namespace Modulo_Matricula.Controllers
             if (ModelState.IsValid)
             {
                 //Encriptamos la contraseña antes de guardar los cambios.
-                usuarios.Contrasena = Encrypt.GetSHA256(usuarios.Contrasena);
+                //usuarios.Contrasena = Encrypt.GetSHA256(usuarios.Contrasena);
                 db.Entry(usuarios).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
