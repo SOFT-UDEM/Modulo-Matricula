@@ -205,6 +205,7 @@
     <Compile Include="Controllers\GradoesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ResponsableLegalsController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Encrypt.cs" />
     <Compile Include="Filters\VerificarSeccion.cs" />
@@ -357,6 +358,11 @@
     <Content Include="Views\Gradoes\Details.cshtml" />
     <Content Include="Views\Gradoes\Edit.cshtml" />
     <Content Include="Views\Gradoes\Index.cshtml" />
+    <Content Include="Views\ResponsableLegals\Index.cshtml" />
+    <Content Include="Views\ResponsableLegals\Details.cshtml" />
+    <Content Include="Views\ResponsableLegals\Create.cshtml" />
+    <Content Include="Views\ResponsableLegals\Edit.cshtml" />
+    <Content Include="Views\ResponsableLegals\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

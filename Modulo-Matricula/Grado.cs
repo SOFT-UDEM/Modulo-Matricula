@@ -44,6 +44,7 @@ namespace Modulo_Matricula
         public int IdGrado { get; set; }
 
         [DisplayName("Id del Estudiante: ")]
+        [Required(ErrorMessage = "Este campo esta Vacío.")]
         public Nullable<int> IdAlumno { get; set; }
 
         [DisplayName("Grupo: ")]
@@ -53,6 +54,7 @@ namespace Modulo_Matricula
 
         [DisplayName("Codigo Nac de estudiante: ")]
         [StringLength(maximumLength: 14, MinimumLength = 14, ErrorMessage = "Solo se puede ingresar 14 caracteres Ejemplo:'JMGP1614871234'") ]
+        //[RegularExpression(@"^\A([^a-z][^A-Z])$", ErrorMessage = "Debe contener 4 letras al Inicio(Son las iniciales del estudiante)")]
         [Required(ErrorMessage = "Este campo esta Vacío.")]
         public string CodigoNacionalDeEstudiante { get; set; }
 

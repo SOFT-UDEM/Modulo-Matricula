@@ -49,7 +49,7 @@ namespace Modulo_Matricula
 
         public int IdAlumno { get; set; }
 
-        [DisplayName("Nombres: ")]
+        [DisplayName("Nombres de Alumno: ")]
         [Required(ErrorMessage = "Este campo esta Vacío.")]
         [MaxLengthAttribute(length: 80)]
         public string Nombre { get; set; }
