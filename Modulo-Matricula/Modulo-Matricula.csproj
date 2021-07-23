@@ -202,6 +202,7 @@
     <Compile Include="Controllers\AccesoLoginController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AlumnosController.cs" />
+    <Compile Include="Controllers\GradoesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
@@ -351,6 +352,11 @@
     <Content Include="Views\Alumnos\Details.cshtml" />
     <Content Include="Views\Alumnos\Edit.cshtml" />
     <Content Include="Views\Alumnos\Index.cshtml" />
+    <Content Include="Views\Gradoes\Create.cshtml" />
+    <Content Include="Views\Gradoes\Delete.cshtml" />
+    <Content Include="Views\Gradoes\Details.cshtml" />
+    <Content Include="Views\Gradoes\Edit.cshtml" />
+    <Content Include="Views\Gradoes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

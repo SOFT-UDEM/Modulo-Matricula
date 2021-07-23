@@ -15,6 +15,12 @@ namespace Modulo_Matricula
     using System.ComponentModel.DataAnnotations;
     using System.Text.RegularExpressions;
 
+
+    ///* Agregamos las librerias (using System.ComponentModel;using System.ComponentModel.DataAnnotations;)
+    // para utilizar las dataNotation para validar y utilizar ciertas caracteristicas que nor permitiran
+    // un mejor manejo de los datos que se ingresaran en los formularios.
+    //*/
+
     public partial class Usuarios
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,12 +28,6 @@ namespace Modulo_Matricula
         {
             this.Matricula = new HashSet<Matricula>();
         }
-
-
-        ///* Agregamos las librerias (using System.ComponentModel;using System.ComponentModel.DataAnnotations;)
-        // para utilizar las dataNotation para validar y utilizar ciertas caracteristicas que nor permitiran
-        // un mejor manejo de los datos que se ingresaran en los formularios.
-        //*/
 
         ///*      
         //   *[Required(ErrorMessage = "Este campo esta Vacío.")] --campo requerido y un mensaje de error.

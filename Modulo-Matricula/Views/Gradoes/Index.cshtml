@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Modulo_Matricula.Grado>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Grupo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CodigoNacionalDeEstudiante)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EstadoDelEstudiante)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CentroDeProcedencia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Alumnos.Nombre)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Grupo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CodigoNacionalDeEstudiante)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EstadoDelEstudiante)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CentroDeProcedencia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Alumnos.Nombre)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IdGrado }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IdGrado }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IdGrado })
+        </td>
+    </tr>
+}
+
+</table>
