@@ -71,9 +71,15 @@
             @Html.DisplayFor(modelItem => item.EnfermedadCronica)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IdAlumno }) |
-            @Html.ActionLink("Details", "Details", new { id=item.IdAlumno }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.IdAlumno })
+            <div class="btn btn-secondary myBtn">
+                @Html.ActionLink("Editar", "Edit", new { id = item.IdAlumno })
+            </div>
+            <div class="btn btn-secondary myBtn">
+                @Html.ActionLink("Ver", "Details", new { id = item.IdAlumno })
+            </div>
+            <div class="btn btn-secondary myBtn">
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.IdAlumno })
+            </div>
         </td>
     </tr>
 }
