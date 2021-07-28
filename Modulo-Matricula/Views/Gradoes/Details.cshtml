@@ -4,11 +4,16 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Details</h2>
+<style>
+    .myBtn {
+        border: 1px solid #3f66fb;
+        border-radius: 5px;
+    }
+</style>
+<h2>Detalle de grado.</h2>
 
 <div>
-    <h4>Grado</h4>
+    @*<h4>Grado</h4>*@
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -53,7 +58,11 @@
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.IdGrado }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<div>
+    <div class="btn btn-default myBtn">
+        @Html.ActionLink("Regresar", "Index")
+    </div>
+    <div class="btn btn-default myBtn">
+        @Html.ActionLink("Editar", "Edit", new { id = Model.IdGrado })
+    </div>
+</div>
