@@ -4,14 +4,19 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<style>
+    .myBtn {
+        border: 1px solid #3f66fb;
+        border-radius: 5px;
+    }
+</style>
+<h2>Asignación de grados.</h2>
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<div style="margin-bottom: 16px;" class="btn btn-secondary myBtn">
+    @Html.ActionLink("Asignar grado a un alumno", "Create")
+</div>
 <table class="table">
-    <tr>
+    <tr style="background-color: #273D4B; color: #ffffff;">
         <th>
             @Html.DisplayNameFor(model => model.Grupo)
         </th>
@@ -48,9 +53,15 @@
             @Html.DisplayFor(modelItem => item.Alumnos.Nombre)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IdGrado }) |
-            @Html.ActionLink("Details", "Details", new { id=item.IdGrado }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.IdGrado })
+            <div class="btn btn-default myBtn">
+                @Html.ActionLink("Editar", "Edit", new { id=item.IdGrado })
+            </div>
+            <div class="btn btn-default myBtn">
+                @Html.ActionLink("Ver", "Details", new { id=item.IdGrado })
+            </div>
+            <div class="btn btn-default myBtn">
+                @Html.ActionLink("Eliminar", "Delete", new { id=item.IdGrado })
+            </div>
         </td>
     </tr>
 }
