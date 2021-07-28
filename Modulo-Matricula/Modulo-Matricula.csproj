@@ -267,6 +267,10 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\back-to-school-concept-with-students-vector.jpg" />
+    <Content Include="images\bg-bottom.svg" />
+    <Content Include="images\bg-top.svg" />
+    <Content Include="images\istockphoto-1224777996-612x612.jpg" />
     <Content Include="MatriculaModels.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>MatriculaModels.cs</LastGenOutput>
