@@ -1,0 +1,99 @@
+﻿@model IEnumerable<Modulo_Matricula.ResponsableLegal>
+
+@{
+    ViewBag.Title = "Tutor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .myBtn {
+        border: 1px solid #3f66fb;
+        border-radius: 5px;
+    }
+    .flex {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 5px;
+    }
+</style>
+<h2>Administración tutor legal.</h2>
+
+<div style="margin-bottom: 16px;" class="btn btn-secondary myBtn">
+    @Html.ActionLink("Agregar tutor legal", "Create")
+</div>
+<table class="table">
+    <tr style="background-color: #273D4B; color: #ffffff;">
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Parentesco)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NumeroDeCedula)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Ocupacion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LugarDeTrabajo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Telefono)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CorreoElectronico)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DireccionDelResponsable)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Alumnos.Nombre)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Parentesco)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NumeroDeCedula)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ocupacion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LugarDeTrabajo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Telefono)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CorreoElectronico)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DireccionDelResponsable)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Alumnos.Nombre)
+        </td>
+        <td class="flex">
+            <div class="btn btn-default myBtn">
+                @Html.ActionLink("Editar", "Edit", new { id = item.IdResponsable })
+            </div>
+            <div class="btn btn-default myBtn">
+                @Html.ActionLink("Ver", "Details", new { id = item.IdResponsable })
+            </div>
+            <div class="btn btn-default myBtn">
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.IdResponsable })
+            </div>
+        </td>
+    </tr>
+}
+
+</table>

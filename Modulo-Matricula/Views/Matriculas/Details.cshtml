@@ -1,0 +1,52 @@
+﻿@model Modulo_Matricula.Matricula
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .myBtn {
+        border: 1px solid #3f66fb;
+        border-radius: 5px;
+    }
+</style>
+<h2>Detalle de matricula</h2>
+
+<div>
+    @*<h4>Matricula</h4>*@
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaRegistro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaRegistro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Alumnos.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Alumnos.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Usuarios.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Usuarios.Nombre)
+        </dd>
+
+    </dl>
+</div>
+<div>
+    <div class="btn btn-default myBtn">
+        @Html.ActionLink("Regresar", "Index")
+    </div>
+    <div class="btn btn-default myBtn">
+        @Html.ActionLink("Editar", "Edit", new { id = Model.IdMatricula })
+    </div>
+</div>

@@ -10,111 +10,107 @@ using Modulo_Matricula;
 
 namespace Modulo_Matricula.Controllers
 {
-    public class UsuariosController : Controller
+    public class AlumnosController : Controller
     {
         private bdsistemaEntities db = new bdsistemaEntities();
 
-        // GET: Usuarios
+        // GET: Alumnos
         public ActionResult Index()
         {
-            return View(db.Usuarios.ToList());
+            return View(db.Alumnos.ToList());
         }
 
-        // GET: Usuarios/Details/5
+        // GET: Alumnos/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Usuarios usuarios = db.Usuarios.Find(id);
-            if (usuarios == null)
+            Alumnos alumnos = db.Alumnos.Find(id);
+            if (alumnos == null)
             {
                 return HttpNotFound();
             }
-            return View(usuarios);
+            return View(alumnos);
         }
 
-        // GET: Usuarios/Create
+        // GET: Alumnos/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Usuarios/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Alumnos/Create
+        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
+        // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IdUsuario,Nombre,Apellido,Usuario,Contrasena,Estado")] Usuarios usuarios)
+        public ActionResult Create([Bind(Include = "IdAlumno,Nombre,Apellido,Direccion,FechaDeNacimiento,Sexo,Religion,IglesiaAlaQueAsiste,EnfermedadCronica")] Alumnos alumnos)
         {
             if (ModelState.IsValid)
             {
-                //Encriptamos contraseña antes de guardar, utilizando el metodo GetSHA256
-                //usuarios.Contrasena = Encrypt.GetSHA256(usuarios.Contrasena);
-                db.Usuarios.Add(usuarios);
+                db.Alumnos.Add(alumnos);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(usuarios);
+            return View(alumnos);
         }
 
-        // GET: Usuarios/Edit/5
+        // GET: Alumnos/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Usuarios usuarios = db.Usuarios.Find(id);
-            if (usuarios == null)
+            Alumnos alumnos = db.Alumnos.Find(id);
+            if (alumnos == null)
             {
                 return HttpNotFound();
             }
-            return View(usuarios);
+            return View(alumnos);
         }
 
-        // POST: Usuarios/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Alumnos/Edit/5
+        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que quiere enlazarse. Para obtener 
+        // más detalles, vea https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IdUsuario,Nombre,Apellido,Usuario,Contrasena,Estado")] Usuarios usuarios)
+        public ActionResult Edit([Bind(Include = "IdAlumno,Nombre,Apellido,Direccion,FechaDeNacimiento,Sexo,Religion,IglesiaAlaQueAsiste,EnfermedadCronica")] Alumnos alumnos)
         {
             if (ModelState.IsValid)
             {
-                //Encriptamos la contraseña antes de guardar los cambios.
-                //usuarios.Contrasena = Encrypt.GetSHA256(usuarios.Contrasena);
-                db.Entry(usuarios).State = EntityState.Modified;
+                db.Entry(alumnos).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(usuarios);
+            return View(alumnos);
         }
 
-        // GET: Usuarios/Delete/5
+        // GET: Alumnos/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Usuarios usuarios = db.Usuarios.Find(id);
-            if (usuarios == null)
+            Alumnos alumnos = db.Alumnos.Find(id);
+            if (alumnos == null)
             {
                 return HttpNotFound();
             }
-            return View(usuarios);
+            return View(alumnos);
         }
 
-        // POST: Usuarios/Delete/5
+        // POST: Alumnos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Usuarios usuarios = db.Usuarios.Find(id);
-            db.Usuarios.Remove(usuarios);
+            Alumnos alumnos = db.Alumnos.Find(id);
+            db.Alumnos.Remove(alumnos);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

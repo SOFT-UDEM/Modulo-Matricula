@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Modulo_Matricula.Alumnos>
+
+@{
+    ViewBag.Title = "Alumnos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .myBtn {
+        border: 1px solid #3f66fb;
+        border-radius: 5px;
+    }
+</style>
+<h2>Administración de alumnos</h2>
+
+<div  style="margin-bottom: 16px;" class="btn btn-secondary myBtn">
+    @Html.ActionLink("Crear nuevo alumno", "Create")
+</div>
+<table class="table">
+    <tr style="background-color: #273D4B; color: #ffffff;">
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Apellido)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Direccion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaDeNacimiento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sexo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Religion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IglesiaAlaQueAsiste)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EnfermedadCronica)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Apellido)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Direccion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaDeNacimiento)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sexo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Religion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IglesiaAlaQueAsiste)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EnfermedadCronica)
+        </td>
+        <td>
+            <div class="btn btn-secondary myBtn">
+                @Html.ActionLink("Editar", "Edit", new { id = item.IdAlumno })
+            </div>
+            <div class="btn btn-secondary myBtn">
+                @Html.ActionLink("Ver", "Details", new { id = item.IdAlumno })
+            </div>
+            <div class="btn btn-secondary myBtn">
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.IdAlumno })
+            </div>
+        </td>
+    </tr>
+}
+
+</table>

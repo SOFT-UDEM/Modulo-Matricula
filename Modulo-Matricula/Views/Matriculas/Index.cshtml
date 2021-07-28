@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Modulo_Matricula.Matricula>
+
+@{
+    ViewBag.Title = "Matricula";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .myBtn {
+        border: 1px solid #3f66fb;
+        border-radius: 5px;
+    }
+</style>
+<h2>Administración de matriculas.</h2>
+
+<div style="margin-bottom: 16px;" class="btn btn-secondary myBtn">
+    @Html.ActionLink("Crear matricula", "Create")
+</div>
+<table class="table">
+    <tr style="background-color: #273D4B; color: #ffffff;">
+        <th>
+            @Html.DisplayNameFor(model => model.FechaRegistro)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Alumnos.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Usuarios.Nombre)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FechaRegistro)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Alumnos.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Usuarios.Nombre)
+        </td>
+        <td>
+            <div class="btn btn-secondary myBtn">
+                @Html.ActionLink("Editar", "Edit", new { id = item.IdMatricula })
+            </div>
+            <div class="btn btn-secondary myBtn">
+                @Html.ActionLink("Ver", "Details", new { id = item.IdMatricula })
+            </div>
+            <div class="btn btn-secondary myBtn">
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.IdMatricula })
+            </div>
+        </td>
+    </tr>
+}
+
+</table>

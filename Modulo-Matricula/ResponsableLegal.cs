@@ -11,18 +11,78 @@ namespace Modulo_Matricula
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
+    ///* Agregamos las librerias (using System.ComponentModel;using System.ComponentModel.DataAnnotations;)
+    // para utilizar las dataNotation para validar y utilizar ciertas caracteristicas que nor permitiran
+    // un mejor manejo de los datos que se ingresaran en los formularios.
+
     public partial class ResponsableLegal
     {
+
+        ///*      
+        //   *[Required(ErrorMessage = "Este campo esta Vacío.")] --campo requerido y un mensaje de error.
+        //   *[Compare("Contrasena")] --nos funciona para comparar con otro imput o campo.
+
+        //   *[DataType(DataType.Date)] --para dar formato de fecha al campo.
+
+        //   *[DisplayName(" ")] --cambia el nobre del campo en el formulario.
+
+        //   *[MaxLengthAttribute(length: 80)] --definimos el maximo de caracteres que se pueden ingresar.
+
+        //   *[EmailAddress] --Valida si es un correo electronico.
+
+        //   *[DataType(DataType.Password)] --lo utilizamos para que la contraseña no sea legible (es decir Pass:*****).
+        //   *[StringLength(8, ErrorMessage = ".... ", MinimumLength = 8)] --definimos la cantidad de caracteres  a ingresar y mandamos un mensaje de error. 
+
+
         public int IdResponsable { get; set; }
+
+        [DisplayName("Id del Estudiante: ")]
+        [Required(ErrorMessage = "Este campo esta Vacío.")]
         public Nullable<int> IdAlumno { get; set; }
+
+        [DisplayName("Nombres y apellidos: ")]
+        [Required(ErrorMessage = "Este campo esta Vacío.")]
+        [MaxLengthAttribute(length: 80, ErrorMessage ="Este campo solamente soporta 80 caracteres")]
         public string Nombre { get; set; }
+
+        [DisplayName("Parentesco: ")]
+        [Required(ErrorMessage = "Este campo esta Vacío.")]
+        [MaxLengthAttribute(length: 20, ErrorMessage ="Este campo solamente soporta 20 caracteres")]
         public string Parentesco { get; set; }
+
+        [DisplayName("N° de Cedula: ")]
+        [Required(ErrorMessage = "Este campo esta Vacío.")]
+        [MaxLengthAttribute(length: 17,ErrorMessage ="Este campo soporta 17 caracteres, Ejemplo: '001-161000-1002K'")]
+        //[RegularExpression("^([a-zA-Z]*$)", ErrorMessage = "Debe contener una letra al final.")]
         public string NumeroDeCedula { get; set; }
+
+        [DisplayName("Ocupacion: ")]
+        [Required(ErrorMessage = "Este campo esta Vacío.")]
+        [MaxLengthAttribute(length: 30, ErrorMessage ="Este campo soporta solamente 30 caracteres")]
         public string Ocupacion { get; set; }
+
+        [DisplayName("Lugar de trabajo: ")]
+        [Required(ErrorMessage = "Este campo esta Vacío.")]
+        [MaxLengthAttribute(length: 60, ErrorMessage = "Este campo soporta solamente 60 caracteres")]
         public string LugarDeTrabajo { get; set; }
+
+        [DisplayName("Telefono: ")]        
+        [Required(ErrorMessage = "Este campo esta Vacío.")]
+        [StringLength(maximumLength: 8, MinimumLength = 8, ErrorMessage = "Solo se puede ingresar numeros de telefono unicamente 8 digitos")]
         public string Telefono { get; set; }
+
+        [DisplayName("Correo: ")]
+        [EmailAddress]
+        [Required(ErrorMessage = "Este campo esta Vacío.")]
+        [MaxLengthAttribute(length: 30, ErrorMessage = "Este campo soporta solamente 30 caracteres")]
         public string CorreoElectronico { get; set; }
+
+        [DisplayName("Direcion: ")]
+        [Required(ErrorMessage = "Este campo esta Vacío.")]
+        [MaxLengthAttribute(length: 255, ErrorMessage = "Este campo soporta solamente 255 caracteres")]
         public string DireccionDelResponsable { get; set; }
     
         public virtual Alumnos Alumnos { get; set; }

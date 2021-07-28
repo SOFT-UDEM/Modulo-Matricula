@@ -1,0 +1,101 @@
+﻿@model Modulo_Matricula.ResponsableLegal
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .myBtn {
+        border: 1px solid #3f66fb;
+        border-radius: 5px;
+    }
+</style>
+
+<h2>Detalle de tutor legal</h2>
+
+<div>
+    @*<h4>ResponsableLegal</h4>*@
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Parentesco)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Parentesco)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumeroDeCedula)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumeroDeCedula)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ocupacion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ocupacion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LugarDeTrabajo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LugarDeTrabajo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Telefono)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Telefono)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CorreoElectronico)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CorreoElectronico)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DireccionDelResponsable)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DireccionDelResponsable)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Alumnos.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Alumnos.Nombre)
+        </dd>
+
+    </dl>
+</div>
+<div>
+    <div class="btn btn-default myBtn">
+        @Html.ActionLink("Regresar", "Index")
+    </div>
+    <div class="btn btn-default myBtn">
+        @Html.ActionLink("Editar", "Edit", new { id = Model.IdResponsable })
+    </div>
+</div>

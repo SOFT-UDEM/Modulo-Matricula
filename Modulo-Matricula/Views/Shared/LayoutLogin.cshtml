@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewBag.Title = "LayoutLogin";
+    ViewBag.Title = "Inicio de Sesión";
 }
 
 <!DOCTYPE html>
@@ -8,7 +8,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - Modulo Matricula</title>
+    <title>@ViewBag.Title - Matricula</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 
@@ -20,14 +20,22 @@
             align-items: center;
             justify-content: center;
         }
+        .container {
+            max-width: 100%;
+            width: auto;
+        }
+        .background {
+            background-image: url('../../images/bg-intro-desktop.png');
+            background-color: #e7f3fd;
+        }
     </style>
 </head>
-<body>
-    <div class="container body-content">
+<body style="padding-top: 0px; padding-bottom: 0px;" class="background">
+    <div class="container body-content images">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Modulo Matricula ASP.NET</p>
+            <p style="font-weight:bold;">&copy; @DateTime.Now.Year - Modulo Matricula ASP.NET</p>
         </footer>
     </div>
 

@@ -1,0 +1,92 @@
+﻿@model Modulo_Matricula.Alumnos
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .myBtn {
+        border: 1px solid #3f66fb;
+        border-radius: 5px;
+    }
+</style>
+<h2>Detalle de alumno.</h2>
+
+<div>
+    @*<h4>Alumnos</h4>*@
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Apellido)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Apellido)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Direccion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Direccion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaDeNacimiento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaDeNacimiento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sexo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sexo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Religion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Religion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IglesiaAlaQueAsiste)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IglesiaAlaQueAsiste)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EnfermedadCronica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EnfermedadCronica)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    <div class="btn btn-default myBtn">
+        @Html.ActionLink("Regresar", "Index")
+    </div>
+    <div class="btn btn-default myBtn">
+        @Html.ActionLink("Editar alumno", "Edit", new { id = Model.IdAlumno })
+    </div>
+</p>

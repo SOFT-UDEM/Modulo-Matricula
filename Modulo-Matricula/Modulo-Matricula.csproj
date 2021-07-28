@@ -201,8 +201,12 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccesoLoginController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AlumnosController.cs" />
+    <Compile Include="Controllers\GradoesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MatriculasController.cs" />
+    <Compile Include="Controllers\ResponsableLegalsController.cs" />
     <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Encrypt.cs" />
     <Compile Include="Filters\VerificarSeccion.cs" />
@@ -263,6 +267,10 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="images\back-to-school-concept-with-students-vector.jpg" />
+    <Content Include="images\bg-bottom.svg" />
+    <Content Include="images\bg-intro-desktop.png" />
+    <Content Include="images\bg-top.svg" />
     <Content Include="MatriculaModels.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>MatriculaModels.cs</LastGenOutput>
@@ -345,6 +353,26 @@
     <Content Include="Views\Usuarios\Details.cshtml" />
     <Content Include="Views\Usuarios\Edit.cshtml" />
     <Content Include="Views\Usuarios\Index.cshtml" />
+    <Content Include="Views\Alumnos\Create.cshtml" />
+    <Content Include="Views\Alumnos\Delete.cshtml" />
+    <Content Include="Views\Alumnos\Details.cshtml" />
+    <Content Include="Views\Alumnos\Edit.cshtml" />
+    <Content Include="Views\Alumnos\Index.cshtml" />
+    <Content Include="Views\Gradoes\Create.cshtml" />
+    <Content Include="Views\Gradoes\Delete.cshtml" />
+    <Content Include="Views\Gradoes\Details.cshtml" />
+    <Content Include="Views\Gradoes\Edit.cshtml" />
+    <Content Include="Views\Gradoes\Index.cshtml" />
+    <Content Include="Views\ResponsableLegals\Index.cshtml" />
+    <Content Include="Views\ResponsableLegals\Details.cshtml" />
+    <Content Include="Views\ResponsableLegals\Create.cshtml" />
+    <Content Include="Views\ResponsableLegals\Edit.cshtml" />
+    <Content Include="Views\ResponsableLegals\Delete.cshtml" />
+    <Content Include="Views\Matriculas\Create.cshtml" />
+    <Content Include="Views\Matriculas\Delete.cshtml" />
+    <Content Include="Views\Matriculas\Details.cshtml" />
+    <Content Include="Views\Matriculas\Edit.cshtml" />
+    <Content Include="Views\Matriculas\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

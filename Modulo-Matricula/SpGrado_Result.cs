@@ -10,13 +10,51 @@
 namespace Modulo_Matricula
 {
     using System;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
+    ///* Agregamos las librerias (using System.ComponentModel;using System.ComponentModel.DataAnnotations;)
+    // para utilizar las dataNotation para validar y utilizar ciertas caracteristicas que nor permitiran
+    // un mejor manejo de los datos que se ingresaran en los formularios.
+    //*/
     public partial class SpGrado_Result
     {
+
+        ///*      
+        //   *[Required(ErrorMessage = "Este campo esta Vacío.")] --campo requerido y un mensaje de error.
+        //   *[Compare("Contrasena")] --nos funciona para comparar con otro imput o campo.
+
+        //   *[DataType(DataType.Date)] --para dar formato de fecha al campo.
+
+        //   *[DisplayName(" ")] --cambia el nobre del campo en el formulario.
+
+        //   *[MaxLengthAttribute(length: 80)] --definimos el maximo de caracteres que se pueden ingresar.
+
+        //   *[EmailAddress] --Valida si es un correo electronico.
+
+        //   *[DataType(DataType.Password)] --lo utilizamos para que la contraseña no sea legible (es decir Pass:*****).
+        //   *[StringLength(8, ErrorMessage = ".... ", MinimumLength = 8)] --definimos la cantidad de caracteres  a ingresar y mandamos un mensaje de error. 
+        //   
+        // */
+
         public int IdGrado { get; set; }
+
+        [DisplayName("Id del Estudiante: ")]
         public Nullable<int> IdAlumno { get; set; }
+
+        [DisplayName("Codigo Nac de estudiante: ")]
+        [StringLength(maximumLength: 14, MinimumLength = 14, ErrorMessage = "Solo se puede ingresar 14 caracteres Ejemplo:'JMGP1614871234'")]
+        [Required(ErrorMessage = "Este campo esta Vacío.")]
         public string CodigoNacionalDeEstudiante { get; set; }
+
+        [DisplayName("Estado del estudiante: ")]
+        [MaxLengthAttribute(length: 40)]
+        [Required(ErrorMessage = "Este campo esta Vacío.")]
         public string EstadoDelEstudiante { get; set; }
+
+        [DisplayName("Escuela anterior: ")]
+        [MaxLengthAttribute(length: 100, ErrorMessage = "el campo soporta 100 caracteres")]
+        [Required(ErrorMessage = "Este campo esta Vacío.")]
         public string CentroDeProcedencia { get; set; }
     }
 }

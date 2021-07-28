@@ -11,16 +11,64 @@ namespace Modulo_Matricula
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
+    ///* Agregamos las librerias (using System.ComponentModel;using System.ComponentModel.DataAnnotations;)
+    // para utilizar las dataNotation para validar y utilizar ciertas caracteristicas que nor permitiran
+    // un mejor manejo de los datos que se ingresaran en los formularios.
+    //*/
+
     public partial class Grado
     {
-        public int IdGrado { get; set; }
-        public Nullable<int> IdAlumno { get; set; }
-        public string Grupo { get; set; }
-        public string CodigoNacionalDeEstudiante { get; set; }
-        public string EstadoDelEstudiante { get; set; }
-        public string CentroDeProcedencia { get; set; }
+
+
     
+
+        ///*      
+        //   *[Required(ErrorMessage = "Este campo esta Vacío.")] --campo requerido y un mensaje de error.
+        //   *[Compare("Contrasena")] --nos funciona para comparar con otro imput o campo.
+
+        //   *[DataType(DataType.Date)] --para dar formato de fecha al campo.
+
+        //   *[DisplayName(" ")] --cambia el nobre del campo en el formulario.
+
+        //   *[MaxLengthAttribute(length: 80)] --definimos el maximo de caracteres que se pueden ingresar.
+
+        //   *[EmailAddress] --Valida si es un correo electronico.
+
+        //   *[DataType(DataType.Password)] --lo utilizamos para que la contraseña no sea legible (es decir Pass:*****).
+        //   *[StringLength(8, ErrorMessage = ".... ", MinimumLength = 8)] --definimos la cantidad de caracteres  a ingresar y mandamos un mensaje de error. 
+     
+
+        public int IdGrado { get; set; }
+
+        [DisplayName("Id del Estudiante: ")]
+        [Required(ErrorMessage = "Este campo esta Vacío.")]
+        public Nullable<int> IdAlumno { get; set; }
+
+        [DisplayName("Grupo: ")]
+        [MaxLengthAttribute(length: 7, ErrorMessage = " este campo soporta 7 caracteres Ejemplo: '6to B'")]
+        [Required(ErrorMessage = "Este campo esta Vacío.")]
+        public string Grupo { get; set; }
+
+        [DisplayName("Codigo Nac de estudiante: ")]
+        [StringLength(maximumLength: 14, MinimumLength = 14, ErrorMessage = "Solo se puede ingresar 14 caracteres Ejemplo:'JMGP1614871234'") ]
+        //[RegularExpression(@"^\A([^a-z][^A-Z])$", ErrorMessage = "Debe contener 4 letras al Inicio(Son las iniciales del estudiante)")]
+        [Required(ErrorMessage = "Este campo esta Vacío.")]
+        public string CodigoNacionalDeEstudiante { get; set; }
+
+        [DisplayName("Estado del estudiante: ")]
+        [MaxLengthAttribute(length: 40)]
+        [Required(ErrorMessage = "Este campo esta Vacío.")]
+        public string EstadoDelEstudiante { get; set; }
+
+        [DisplayName("Escuela anterior: ")]
+        [MaxLengthAttribute(length: 100, ErrorMessage ="el campo soporta 100 caracteres")]
+        [Required(ErrorMessage = "Este campo esta Vacío.")]
+        public string CentroDeProcedencia { get; set; }
+
+     
         public virtual Alumnos Alumnos { get; set; }
     }
 }

@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Modulo_Matricula.Grado>
+
+@{
+    ViewBag.Title = "Grados";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .myBtn {
+        border: 1px solid #3f66fb;
+        border-radius: 5px;
+    }
+</style>
+<h2>Asignación de grados.</h2>
+
+<div style="margin-bottom: 16px;" class="btn btn-secondary myBtn">
+    @Html.ActionLink("Asignar grado a un alumno", "Create")
+</div>
+<table class="table">
+    <tr style="background-color: #273D4B; color: #ffffff;">
+        <th>
+            @Html.DisplayNameFor(model => model.Grupo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CodigoNacionalDeEstudiante)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EstadoDelEstudiante)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CentroDeProcedencia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Alumnos.Nombre)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Grupo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CodigoNacionalDeEstudiante)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EstadoDelEstudiante)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CentroDeProcedencia)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Alumnos.Nombre)
+        </td>
+        <td>
+            <div class="btn btn-default myBtn">
+                @Html.ActionLink("Editar", "Edit", new { id=item.IdGrado })
+            </div>
+            <div class="btn btn-default myBtn">
+                @Html.ActionLink("Ver", "Details", new { id=item.IdGrado })
+            </div>
+            <div class="btn btn-default myBtn">
+                @Html.ActionLink("Eliminar", "Delete", new { id=item.IdGrado })
+            </div>
+        </td>
+    </tr>
+}
+
+</table>
