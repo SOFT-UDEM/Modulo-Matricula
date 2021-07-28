@@ -80,6 +80,7 @@ CREATE TABLE Matricula (
 	CONSTRAINT pk_Matricula_IdMatricula PRIMARY KEY NONCLUSTERED(IdMatricula),
 	CONSTRAINT fk_Matricula_IdAlumno FOREIGN KEY(IdAlumno) REFERENCES Alumnos(IdAlumno) ON UPDATE CASCADE ON DELETE CASCADE,
 	CONSTRAINT fk_Matricula_IdUsuario FOREIGN KEY(IdUsuario) REFERENCES Usuarios(IdUsuario) ON UPDATE CASCADE ON DELETE CASCADE
+)
 GO
 
 -- Tabla ResponsabeLegal
