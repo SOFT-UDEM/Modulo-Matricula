@@ -519,3 +519,22 @@ BEGIN
 END
 GO
 -- Fin procedimiento almacenado Grado.
+
+-- Creación de usuario por defecto del sistema
+INSERT INTO bdsistema..Usuarios 
+(
+	Nombre, 
+	Apellido, 
+	Usuario, 
+	Contrasena, 
+	Estado
+)
+VALUES
+(
+	'Usuario',
+	'Por defecto',
+	'usuario@gmail.com',
+	'0d9d09e157f7c29a43c02e57f081915d6fe2f10da1710672086f8ad73bb95cb2',
+	1
+)
+GO
